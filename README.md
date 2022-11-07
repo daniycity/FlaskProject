@@ -27,10 +27,7 @@
 
 ## License and contact information <a id="license"></a>
 All the information and images from this website can be protected by copyright, used only for educational purpose and not for commmercial scope and not for profit. All the code information  are copyright free and can be used with no authorization. We don't assume no responsability for the illegal use of this code.
-- Contact information
-    - Daniele Pagano: daniele.pagano@edu.itspiemonte.it
-    - Matteo Fasano: matteo.fasano@edu.itspiemonte.it
-    - Oliver Terzo: oliver.terzo@edu.itspiemonte.it
+
 1. ### Author
     - **name:** Daniele Pagano
     - **role:** Developer
