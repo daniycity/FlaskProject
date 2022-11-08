@@ -9,6 +9,16 @@ app = Flask(__name__)
 def default():
     if request.method == "POST":
         search_text = request.form.get("anime_name")
-        res = aw.find(f"{escape(search_text)}")
-        return render_template(f"anime.html", allAnime=res, search_text=search_text)
+        result = aw.find(f"{escape(search_text)}")
+        return render_template(f"search.html", allAnime=result, search_text=search_text)
     return render_template("index.html")
+
+@app.route('/<name>')
+def show_anime(name):
+    link = aw.find(f"{escape(name)}")[0]['link']
+    anime = aw.Anime(link)
+    episodes = anime.getEpisodes()
+    download = []
+    for ep in episodes:
+        download.append(ep.links[0].link)
+    return download
