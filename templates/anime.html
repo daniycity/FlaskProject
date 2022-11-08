@@ -1,13 +1,10 @@
 {% extends "default.html" %}
 {% block title %}Anime Trovati{% endblock %}
 {% block head %}
-{{ super() }}
-
 {% endblock %}
 {% block content %}
 
-
-{% if allAnime|length ==0 %}
+{% if allAnime|length == 0 %}
 <h1 class="text-light">Non ho trovato una ciola</h1>
 {% else %}
 <h1 class="text-light">Anime trovati</h1>
