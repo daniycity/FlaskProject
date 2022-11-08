@@ -1,2 +1,5 @@
 venv
+AnimeEnv
 __pycache__
+.vscode
+.DS_Store

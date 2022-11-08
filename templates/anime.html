@@ -1,33 +1,27 @@
 {% extends "default.html" %}
-{% block title %}Anime Trovati{% endblock %}
+{% block title %}Ricerca Anime{% endblock %}
 {% block head %}
-{{ super() }}
-
 {% endblock %}
 {% block content %}
 
-
-{% if allAnime|length ==0 %}
+{% if allAnime|length == 0 %}
 <h1 class="text-light">Non ho trovato una ciola</h1>
 {% else %}
-<h1 class="text-light">Anime trovati</h1>
+<h1 class="text-light">Risultati ottenuti da: "{{search_text}}"</h1>
 {% endif %}
 
-
 <div class="row">
-
-
     {% for item in allAnime %}
     <div class="col">
         <div class="card" style="width: 18rem;">
             <img src="{{item.image}}" class="card-img-top" alt="..." max>
             <div class="card-body">
                 <h5 class="card-title">{{item.name}}</h5>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="{{item.link}}" class="btn btn-primary">Vai all'anime</a>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
-</div>
+
 {% endblock %}

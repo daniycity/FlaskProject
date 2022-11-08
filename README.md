@@ -33,7 +33,7 @@ All the information and images from this website can be protected by copyright, 
     - **role:** Developer
 2. ### Author
     - **name:** Mirko Pica
-    - **role:** Developer
+    - **role:** Developer (un po' fallito)
 3. ### Author
     - **name:** Raffaele Castagna
     - **role:** Developer (rompicoglioni)

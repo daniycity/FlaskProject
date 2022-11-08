@@ -1,25 +1,14 @@
-from flask import Flask, url_for
+from flask import Flask, request, url_for, render_template
 from markupsafe import escape
 import animeworld as aw
-from flask import render_template
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return render_template('index.html')
+#Comando per eseguire il tutto $ flask --app main.py --debug run
 
-@app.get('/login')
-def form_get():
-    return render_template('form.html')
-
-@app.post('/login')
-def form_post():
-    return do_the_login()
-
-@app.route("/anime/<anime>")
-def anime(anime):
-    res = aw.find(f"{escape(anime)}")
-    return render_template('anime.html', allAnime=res)
-
-    
-
+@app.route('/', methods=["GET", "POST"])
+def default():
+    if request.method == "POST":
+        search_text = request.form.get("anime_name")
+        res = aw.find(f"{escape(search_text)}")
+        return render_template(f"anime.html", allAnime=res, search_text=search_text)
+    return render_template("index.html")
