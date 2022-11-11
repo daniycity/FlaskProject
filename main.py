@@ -22,3 +22,14 @@ def show_anime(name):
     for ep in episodes:
         download.append(ep.links[0].link)
     return download
+
+@app.route("/search/<name>")
+def search(name):
+    result =aw.find(f"{escape(name)}")
+    realResutl=[]
+    print(result)
+    
+    for a in result:
+        object = {'name':a['name'],'img':a['image']}
+        realResutl.append(object)
+    return realResutl
