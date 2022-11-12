@@ -13,15 +13,15 @@ def default():
         return render_template(f"search.html", allAnime=result, search_text=search_text)
     return render_template("index.html")
 
-'''@app.route('/<name>')
+@app.route('/<name>')
 def show_anime(name):
     link = aw.find(f"{escape(name)}")[0]['link']
     anime = aw.Anime(link)
     episodes = anime.getEpisodes()
-    download = []
+    direct_links = []
     for ep in episodes:
-        download.append(ep.links[0].link)
-    return download'''
+        direct_links.append(ep.links[0].link)
+    return render_template("anime.html", anime=anime, links=enumerate(direct_links, 1))
 
 @app.route("/search/<name>")
 def search(name):
@@ -30,6 +30,6 @@ def search(name):
     print(result)
     
     for x in result:
-        object = {'name':x['name'],'img':x['image'], 'link':x['link']}
+        object = {'name':x['name'],'img':x['image']}
         realResult.append(object)
     return realResult
