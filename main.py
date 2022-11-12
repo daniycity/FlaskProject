@@ -20,7 +20,7 @@ def show_anime(name):
     episodes = anime.getEpisodes()
     direct_links = []
     for ep in episodes:
-        direct_links.append(ep.links[0].link)
+        direct_links.append(ep.links[0].link.replace("download-file.php?id=",""))
     return render_template("anime.html", anime=anime, links=enumerate(direct_links, 1))
 
 @app.route("/search/<name>")
