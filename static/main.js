@@ -4,7 +4,13 @@ let suggestionArea = document.getElementById("suggestionContainer");
 
 textArea.oninput = debounce(makeXhtmlRequest, 400);
 
+textArea.addEventListener('focus', (event) => {
+  toggleVisibilitySuggestion(true);
+});
 
+textArea.addEventListener('blur', (event) => {
+  toggleVisibilitySuggestion(false);
+});
 
 function debounce(cb, interval, immediate) {
   var timeout;
@@ -29,6 +35,7 @@ function debounce(cb, interval, immediate) {
 function makeXhtmlRequest() {
   let animeToSearch = textArea.value;
   console.log(animeToSearch);
+  console.log(animeToSearch != "")
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
     suggestionArea.innerHTML = ""; //reset initial value
@@ -50,8 +57,7 @@ function makeXhtmlRequest() {
           </div>`
       return;
     }
-    
-    if (json.length == 0) {
+    if (json.length == 0 && animeToSearch != "") {
       suggestionArea.innerHTML += `<div class="card mb-3 suggestion">
             <div class="row g-0">
               <div class="col-md-4">
@@ -80,13 +86,32 @@ function makeXhtmlRequest() {
             </div>
           </div>`
     });
-
-
+  }
+  xhttp.onloadend = function () {
+    if (xhttp.status == 404) {
+      suggestionArea.innerHTML = ""; //clean status
+      suggestionArea.innerHTML += `<div class="card mb-3 suggestion">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Magnifying_glass_icon.svg/1200px-Magnifying_glass_icon.svg.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">                              
+            <p class="card-text">Digita per trovare il tuo anime</p>
+          </div>
+        </div>
+      </div>
+    </div>`
+    }
   }
   xhttp.open("GET", "./search/" + animeToSearch);
   xhttp.send();
 }
 
-function toggleVisibilitySuggestion() {
+function toggleVisibilitySuggestion(toogleVis) {
+  if (toogleVis == true)
+    suggestionArea.style.opacity = 1;
+  else
+    suggestionArea.style.opacity = 0;
 
 }
