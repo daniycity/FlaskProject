@@ -1,5 +1,5 @@
 venv
-AnimeEnv
+FlaskAnime
 __pycache__
 .vscode
 .DS_Store
