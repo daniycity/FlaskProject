@@ -15,19 +15,21 @@ def default():
 
 @app.route('/<name>')
 def show_anime(name):
-    link = aw.find(f"{escape(name)}")[0]['link']
+    temp = aw.find(f"{escape(name)}")[0]
+    link = temp['link']
+    image = temp['image']
+    story = temp['story']
     anime = aw.Anime(link)
     episodes = anime.getEpisodes()
     direct_links = []
     for ep in episodes:
         direct_links.append(ep.links[0].link.replace("download-file.php?id=",""))
-    return render_template("anime.html", anime=anime, links=enumerate(direct_links, 1))
+    return render_template("anime.html", anime=anime, links=enumerate(direct_links, 1), image=image, story = story)
 
 @app.route("/search/<name>")
 def search(name):
     result =aw.find(f"{escape(name)}")
     realResult=[]
-    print(result)
     
     for x in result:
         object = {'name':x['name'],'img':x['image']}

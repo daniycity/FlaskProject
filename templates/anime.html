@@ -5,12 +5,21 @@
 {% endblock %}
 {% block content %}
 
-<h1 class="text-light">{{anime.getName()}}</h1>
 
+<div id="headerAnime">
+  <div class="row">
+    <div class="col-sm-2"><img src="{{image}}" class="img-fluid" alt="..."></div>
+    <div class="col">
+      <h1 class="text-light">{{anime.getName()}}</h1>
+      <p class="text-white">{{story}}</p>
+    </div>
+
+  </div>
+</div>
 <div class="list-group text-light">
-    {% for num, link in links %}
-      <a href="{{link}}" download class="list-group-item list-group-item-action">{{num}}</a>
-    {% endfor %}
+  {% for num, link in links %}
+  <a href="{{link}}" download class="list-group-item list-group-item-action">{{num}}</a>
+  {% endfor %}
 </div>
 
 {% endblock %}
