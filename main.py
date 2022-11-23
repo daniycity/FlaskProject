@@ -19,12 +19,13 @@ def show_anime(name):
     link = temp['link']
     image = temp['image']
     story = temp['story']
+    numButton = temp['episodes']
+
     anime = aw.Anime(link)
-    episodes = anime.getEpisodes()
-    direct_links = []
-    for ep in episodes:
-        direct_links.append(ep.links[0].link.replace("download-file.php?id=",""))
-    return render_template("anime.html", anime=anime, links=enumerate(direct_links, 1), image=image, story = story)
+    #episodes = anime.getEpisodes()
+    #for ep in episodes:
+        #direct_links.append(ep.links[0].link.replace("download-file.php?id=",""))
+    return render_template("anime.html", anime=anime, numButton=numButton, image=image, story = story)
 
 @app.route("/search/<name>")
 def search(name):

@@ -3,7 +3,9 @@
     height: 10vw;
     object-fit: scale-down;
 }
-
+.episodeContainer{
+    display: none;
+}
 #suggestionContainer {
     width: 35rem;
     background-color: white;
