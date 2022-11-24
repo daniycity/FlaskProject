@@ -34,8 +34,6 @@ function debounce(cb, interval, immediate) {
 
 function makeXhtmlRequest() {
   let animeToSearch = textArea.value;
-  console.log(animeToSearch);
-  console.log(animeToSearch != "")
   const xhttp = new XMLHttpRequest();
   xhttp.onload = function () {
     suggestionArea.innerHTML = ""; //reset initial value

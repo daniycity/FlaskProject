@@ -36,3 +36,15 @@ def search(name):
         object = {'name':x['name'],'img':x['image']}
         realResult.append(object)
     return realResult
+# TODO This route it's really shit as logic I was in hurry please fix me D: ! 
+@app.route("/download/<name>/<epStart>/<epEnd>")
+def download(name, epStart,epEnd):
+    temp = aw.find(f"{escape(name)}")[0]
+    link = temp['link']
+    anime = aw.Anime(link)
+    episodes = anime.getEpisodes()
+    direct_links=[]
+    for i in range(int(epEnd)-int(epStart)):
+        direct_links.append(episodes[i].links[0].link.replace("download-file.php?id=",""))
+    print(direct_links)
+    return direct_links
