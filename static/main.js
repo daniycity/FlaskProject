@@ -79,7 +79,7 @@ function makeXhtmlRequest() {
               <div class="col-md-8">
                 <div class="card-body">                              
                   <p class="card-text">${element.name}</p>
-                  <a href="/${element.name}" class="stretched-link"></a>
+                  <a href="/anime/${element.name}" class="stretched-link"></a>
                 </div>
               </div>
             </div>
