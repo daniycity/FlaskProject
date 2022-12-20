@@ -1,4 +1,4 @@
-from flask import Flask, request, url_for, render_template
+from flask import Flask, request, url_for, render_template, redirect
 from markupsafe import escape
 import animeworld as aw
 app = Flask(__name__)
@@ -20,31 +20,26 @@ def show_anime(name):
     image = temp['image']
     story = temp['story']
     numButton = temp['episodes']
-
     anime = aw.Anime(link)
-    #episodes = anime.getEpisodes()
-    #for ep in episodes:
-        #direct_links.append(ep.links[0].link.replace("download-file.php?id=",""))
-    return render_template("anime.html", anime=anime, numButton=numButton, image=image, story = story)
+    return render_template("anime.html", anime=anime, numButton=numButton, image=image, story=story)
 
 @app.route("/search/<name>")
 def search(name):
-    result =aw.find(f"{escape(name)}")
-    realResult=[]
-    
-    for x in result:
+    preResult = aw.find(f"{escape(name)}")
+    result=[]
+    for x in preResult:
         object = {'name':x['name'],'img':x['image']}
-        realResult.append(object)
-    return realResult
-# TODO This route it's really shit as logic I was in hurry please fix me D: !
-@app.route("/download/<name>/<epStart>/<epEnd>")
-def download(name, epStart,epEnd):
+        result.append(object)
+    return result
+
+# TODO This route it's still a problem with bigger anime, needs new logic!
+@app.route("/download/<name>/<ep>")
+def download(name, ep):
     temp = aw.find(f"{escape(name)}")[0]
     link = temp['link']
     anime = aw.Anime(link)
     episodes = anime.getEpisodes()
-    direct_links=[]
-    for i in range(int(epEnd)-int(epStart)):
-        direct_links.append(episodes[i].links[0].link.replace("download-file.php?id=",""))
-    print(direct_links)
-    return direct_links
+    try:
+        return redirect(episodes[int(ep)-1].links[0].link.replace("download-file.php?id=",""))
+    except IndexError:
+        return "Episodio non ancora disponibile!"
